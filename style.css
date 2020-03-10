@@ -1,0 +1,51 @@
+
+body{
+    background-color: lightgrey;
+}
+
+.row{
+    padding-bottom: 0px;
+}
+
+h1{
+    color: lightsalmon;
+    text-align: center;
+    padding-top: 20px;
+}
+
+p{
+    length: 500px;
+    width: 500px;
+    text-align: justify;
+}
+
+h3{
+    color: lightsalmon;
+    text-align: center;
+}
+
+#startButton{
+    color: black;
+    background-color: lightsalmon;
+}
+
+#timer{
+    float:right;
+    padding-top: 25px;
+    margin: 0px;
+}
+#question{
+    font-size: 40px;
+    padding-top:40px;
+    padding-bottom: 40px;
+    color: lightsalmon;
+}
+
+.choices{
+    font-size: 20px;
+    padding: 20px;
+}
+
+.result{
+    color: green;
+}

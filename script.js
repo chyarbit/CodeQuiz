@@ -6,7 +6,6 @@ var answerA = document.getElementById("a");
 var answerB = document.getElementById("b");
 var answerC = document.getElementById("c");
 var answerD = document.getElementById("d");
-var timeLeft = document.getElementById("wrongAnswerTimer");
 var intro = document.getElementById("intro");
 var results = document.getElementById("results");
 var secondsLeft = 60;
@@ -20,7 +19,7 @@ var questions = [
     },
     { 
     question: "What does DOM stand for?",
-    answers: ["Dominant Object Model","Document Objective Mode","Document Object Model"],
+    answers: ["Dominant Object Model","Document Objective Mode","Document Object Model", "Dominant Objective Model"],
     correctAnswer: "Document Object Model"
     },
     { 
@@ -31,7 +30,7 @@ var questions = [
     { 
     question: "Which statement below is true?",
     answers: ["A variable can only be a number.","Functions can only result in a numerical output.","Strings are arrays.","You can create better websites when using a Mac versus a PC"],
-    correctAnswer: "Strings are arrays"
+    correctAnswer: "Strings are arrays."
     },
     { 
     question: "Given var x = [1,2,3], what will console.log(x[9]) state?",
@@ -40,9 +39,7 @@ var questions = [
     },
 ]
 
-
-// If user gets question correctly, move on to the next question
-// If user gets question wrong, subtract 10 seconds to the timer
+// Add event listeners to the answer options.  When clicked, it will run checkAnswer function
 answerA.addEventListener("click", function() {
     checkAnswer(questions[questionPosition].answers[0]);
     
@@ -57,23 +54,25 @@ answerD.addEventListener("click", function() {
     checkAnswer(questions[questionPosition].answers[3]);
 }); 
 
-// Function to check answer
-function checkAnswer(answer){
-    if (answer == questions[questionPosition].correctAnswer){
-        results.innerHTML = "That's Correct!";
-        questionPosition++;
-        renderQuestion();
-    }
-    else{
-        results.innerHTML = "Incorrect!";
-        //here is where we want to decrease the timer for an incorrect answer
-        secondsLeft -= 10;
-    }
-    // Moves question position up
+// create function to set the timer
+function setTimer() {
+    var timerInterval = setInterval(function() {
+      secondsLeft--;
+      timer.textContent = secondsLeft + " seconds left";
+  
+      if(secondsLeft <= 0) {
+        clearInterval(timerInterval);
+        sendMessage();
+      }
+    }, 1000);
+  }
+  // If timer goes down to 0, send this message
+  function sendMessage() {
+      timer.textContent = "Sorry!  You are out of time!";
+      // NEEDED IMPROVEMENT: force quiz to stop when 0 seconds are left
+  }
 
- 
-}
-//Render questions to HTMLs
+// create a function to render questions 
 var questionStart = 0;
 var questionPosition = questionStart;
 
@@ -90,28 +89,41 @@ function renderQuestion(){
     answerC.innerText= questions[questionPosition].answers[2];
     answerD.innerText = questions[questionPosition].answers[3];
     }
-//will need to make sure to have questionsStart stops at the last question
-
-// Start quiz time by clicking the button and move to first question
-// Define time left in seconds
 
 
-function setTimer() {
-  var timerInterval = setInterval(function() {
-    secondsLeft--;
-    timer.textContent = secondsLeft + " seconds left";
 
-    if(secondsLeft === 0) {
-      clearInterval(timerInterval);
-      sendMessage();
+// Function to check answer
+function checkAnswer(answer){
+    // If user gets question correctly   
+    if (answer == questions[questionPosition].correctAnswer){
+        results.innerHTML = "That's Correct!";
+        // move on to the next question
+        questionPosition++;
+        renderQuestion();
     }
-  }, 1000);
+    // If user gets question wrong
+    else{
+        results.innerHTML = "Incorrect!";
+        // subtract 10 seconds from the timer
+        secondsLeft -= 10;
+    }
 }
-// If timer goes down to 0, send this message
-function sendMessage() {
-    timer.textContent = "Sorry!  You are out of time!";
-}
-
-// After all questions have been answered, click button to submit quiz and display score
+// ** NEED IMPROVEMENT- I cannot get this function to work
+// After all questions have been answered
+// Compute score and show score in a new element
+  //function showScore() {
+    //var score = document.createElement("score");
+    
+    //var numCorrect = 0;
+    //for (var i = 0; i < questions.length; i++) {
+      //if (questions[i] === questions[i].correctAnswer) {
+        //numCorrect++;
+      //}
+    //}
+    
+    //score.appendChild("You received " +"numCorrect" + " questions correct!")
+    //return score;
+  //}
 
 // Call functions ...//
+//function showScore()

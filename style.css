@@ -14,7 +14,6 @@ h1{
 }
 
 p{
-    length: 500px;
     width: 500px;
     text-align: justify;
 }
@@ -38,12 +37,14 @@ h3{
     font-size: 40px;
     padding-top:40px;
     padding-bottom: 40px;
-    color: lightsalmon;
+    
 }
 
 .choices{
     font-size: 20px;
-    padding: 20px;
+    background-color: lightsalmon;
+    color: black;
+    margin: 20px;
 }
 
 .result{
